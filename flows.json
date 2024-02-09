@@ -1,0 +1,222 @@
+[
+    {
+        "id": "39a0ca0c666671f7",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "b7ab102cf9517aa7",
+        "type": "http in",
+        "z": "39a0ca0c666671f7",
+        "name": "",
+        "url": "/css",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 100,
+        "y": 60,
+        "wires": [
+            [
+                "ec25cd2e1b3a4c03"
+            ]
+        ]
+    },
+    {
+        "id": "bd563a0724955d05",
+        "type": "http response",
+        "z": "39a0ca0c666671f7",
+        "name": "",
+        "statusCode": "",
+        "headers": {
+            "content-type": "text/css"
+        },
+        "x": 430,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "ec25cd2e1b3a4c03",
+        "type": "template",
+        "z": "39a0ca0c666671f7",
+        "name": "customCSS",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "css",
+        "syntax": "mustache",
+        "template": "::-webkit-scrollbar {\n  width: 0.1px;\n  scrollbar-color: #9bc7f38b;\n}\n.main_container {\n  top:0 !important;\n  left: 0 !important; \n  height: 100vh !important;\n  width: 100% !important;\n  padding: 10px !important;\n  background-image: linear-gradient(180deg, #9bc7f3 25%, #ffffff 100%) !important;\n\n}\n\n.main_container>div>div>div>div>div>div>div>div>div>div>div>div>div{\n  display:flex;\n  justify-content: center;\n  align-items: center;\n  gap: 10px;\n}\n\n.main_container>div>div>div>div>div>div>div>div>div>div {\n  height:100% !important; \n}\n.form_container, .answer_container   {\n    position: relative !important;\n    top: 0 !important;\n    left: 0 !important;\n    max-height: 95vh !important;\n}\n\n.bp3-input, .select-button {\n    border-radius: 5px !important;\n    color: #231F20 !important;\n}\n.select-button span {\n    color: inherit !important;\n}\n\n.title .bp3-ui-text {\n   font-size: clamp(20px, 2.3vw, 50px) !important; \n   cursor: default !important;\n}\n\n.generate_btn span{\n    color: #FFFFFF !important;\n}\n.answer_container>div {\n  border-radius: 10px;\n  box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 4px 3px !important;\n}\n.answer_container>div>div>div>div>div>div>div {\n  border-radius: 10px;\n  padding: 7px !important;\n  \n}\n.label-container {\n  justify-content: space-between !important;\n}\n\n.flying_image{\n  top: 10px !important;\n  height: 100vh !important;\n  z-index: 0 !important;\n}\n.left{\nleft: 10px !important;\n--index: 1;\n}\n.right{\n  right: 10px !important;\n  --index: 2;\n}\n\n.flying_image > div > div > div > div > div > div > div {\n    animation: float 40s linear 0s infinite normal none;\n    transform-origin: 50% 50%;\n    z-index: 0 !important;\n    height: 30px !important;\n}\n\n@keyframes float {\n    0%, 100% {\n        transform: translateX(0%) translateY(0%);\n    }\n    15% {\n        transform: translateX(calc(var(--index) * 30px)) translateY(calc(var(--index) * 10vh)) rotate(calc(var(--index) * 27deg));\n    }\n    30% {\n        transform: translateX(calc(var(--index) * 15px)) translateY(calc(var(--index) * 50vh)) rotate(calc(var(--index) * -4deg));\n    }\n    45% {\n        transform: translateX(calc(var(--index) * -15px)) translateY(calc(var(--index) * 90vh)) rotate(calc(var(--index) * -2deg));\n    }\n    60% {\n        transform: translateX(calc(var(--index) * 9px)) translateY(calc(var(--index) * 50vh)) rotate(calc(var(--index) * 35deg));\n    }\n    75% {\n        transform: translateX(calc(var(--index) * -6px)) translateY(calc(var(--index) * 30vh)) rotate(calc(var(--index) * 2deg));\n    }\n}",
+        "output": "str",
+        "x": 270,
+        "y": 60,
+        "wires": [
+            [
+                "bd563a0724955d05"
+            ]
+        ]
+    },
+    {
+        "id": "9caa7218666323f8",
+        "type": "function",
+        "z": "39a0ca0c666671f7",
+        "name": "",
+        "func": "msg.userData = msg.payload;\n\nmsg.url = msg.payload.website.trim();\nreturn msg;\n\n\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "objectid",
+                "module": "objectid"
+            }
+        ],
+        "x": 300,
+        "y": 180,
+        "wires": [
+            [
+                "808693f37082f4f8"
+            ]
+        ]
+    },
+    {
+        "id": "808693f37082f4f8",
+        "type": "http request",
+        "z": "39a0ca0c666671f7",
+        "name": "Get Link Info",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 470,
+        "y": 180,
+        "wires": [
+            [
+                "fdb93efc2907d2d2"
+            ]
+        ]
+    },
+    {
+        "id": "fdb93efc2907d2d2",
+        "type": "function",
+        "z": "39a0ca0c666671f7",
+        "name": "Scrape",
+        "func": "const { JSDOM } = jsdom;\nconst html = msg.payload;\nconst dom = new JSDOM(`${html}`);\n\ndom.window.document.querySelectorAll('style').forEach(link => {\n    link.remove();\n});\ndom.window.document.querySelectorAll('script').forEach(link => {\n    link.remove();\n});\n\nconst document = dom.window.document;\nconst pageText = document.body.textContent;\n\nmsg.text = pageText;\n\nlet table = dom.window.document.querySelector('table');\nlet ckeckTable = table?.textContent ? true : false;\n\nif (ckeckTable) {\n    const headers = Array.from(table.querySelectorAll('tr:first-child th, tr:first-child td')).map(td => {\n        const text = td.textContent.trim();\n        return text !== \"\" ? text : undefined;\n    }).filter(Boolean);\n\n    const rows = Array.from(table.querySelectorAll('tr:not(:first-child)'));\n    const tableData = rows.map(row => {\n        const rowData = Array.from(row.querySelectorAll('td')).map(td => td.textContent.trim());\n        return Object.fromEntries(headers.map((header, index) => [header, rowData[index]]));\n    });\n\n} else {\n     msg.pageContent = pageText;\n}\n\nconst MAX_LENGTH = 500;\n\nmsg.result = [];\nlet currentParagraph = '';\n\nconst sentences = msg.pageContent.replace(/\\s+/g, ' ').split(/([.?!])+/).filter(sentence => sentence.trim() !== '');\n\nfor (const sentence of sentences) {\n    if (currentParagraph.length + sentence.length <= MAX_LENGTH) {\n        currentParagraph += sentence;\n    } else {\n        msg.result.push(currentParagraph.trim());\n        currentParagraph = sentence;\n    }\n}\n\nif (currentParagraph.trim() !== '') {\n    msg.result.push(currentParagraph.trim());\n}\n\nmsg.payload = msg.result;\n\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "jsdom",
+                "module": "jsdom"
+            }
+        ],
+        "x": 620,
+        "y": 180,
+        "wires": [
+            [
+                "55d5db6359a0fa94"
+            ]
+        ]
+    },
+    {
+        "id": "c56a7d370fa06cad",
+        "type": "http in",
+        "z": "39a0ca0c666671f7",
+        "name": "",
+        "url": "/getFeedback",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 130,
+        "y": 180,
+        "wires": [
+            [
+                "9caa7218666323f8"
+            ]
+        ]
+    },
+    {
+        "id": "55d5db6359a0fa94",
+        "type": "function",
+        "z": "39a0ca0c666671f7",
+        "name": "make request to OpenAI",
+        "func": "const data = msg.pageContent;\nmsg.OPENAI_API_KEY = msg.userData.openAIKey;\nmsg.model = msg.userData.model;\n\nmsg.messages= [\n    {\n        role: \"system\",\n        content: \"act as a world class marketer\",\n    },\n    {\n        role: \"user\", content: `You are an AI assistant who's a world class marketer. You have deep expertise analysing company websites and are highly skilled at reverse engineering the target audience of a company based on their website's text.Your task is to extract the target audience.\n\n// Output only the target audience with no pre-text or post-text. \n\nHere is the text from a company's website:${data} ` },\n];\n\n// Make sure your answer is detailed and specific.\n\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 810,
+        "y": 180,
+        "wires": [
+            [
+                "abaccb29fd60f0c9"
+            ]
+        ]
+    },
+    {
+        "id": "abaccb29fd60f0c9",
+        "type": "openai-ubos",
+        "z": "39a0ca0c666671f7",
+        "name": "",
+        "model": "gpt-3.5-turbo",
+        "temperature": 0.5,
+        "max_tokens": 500,
+        "prompt": "",
+        "frequency_penalty": 0,
+        "presence_penalty": 0,
+        "top_p": 1,
+        "stop": {
+            "type": "json",
+            "value": "[]"
+        },
+        "OPENAI_API_KEY": "",
+        "x": 1020,
+        "y": 180,
+        "wires": [
+            [
+                "28eea3850026e9de"
+            ]
+        ]
+    },
+    {
+        "id": "7e57c7bee4ce47fe",
+        "type": "http response",
+        "z": "39a0ca0c666671f7",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1310,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "28eea3850026e9de",
+        "type": "function",
+        "z": "39a0ca0c666671f7",
+        "name": "response",
+        "func": "if(msg.statusCode === 200){\n    const answers = msg.payload.choices[0].message.content\n    msg.payload= answers;\n}\nelse {\n    msg.payload = `     Ooops, something went wrong!🥲\n    ${msg.payload.error.message}`\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1180,
+        "y": 180,
+        "wires": [
+            [
+                "7e57c7bee4ce47fe"
+            ]
+        ]
+    }
+]
